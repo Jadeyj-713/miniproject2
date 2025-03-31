@@ -1,0 +1,180 @@
+/* 공통 스타일 */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* 네비게이션 바 */
+.navContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* 로고 스타일 */
+.navLogo img {
+  height: 50px;
+  margin-top: 5px;
+  cursor: pointer;
+  margin-left: 100px;
+}
+
+
+/* 메뉴 스타일 */
+.navMenu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin-right: 100px;
+  padding: 0;
+}
+
+.navMenu li {
+  margin: 0 15px;
+  display: inline-block;
+}
+
+.navMenu a {
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
+  transition: color 0.3s ease;
+  align-items: center;
+}
+
+.navMenu a:hover {
+  color: #0080ff;
+}
+
+/* 버튼 및 아이콘 스타일 */
+.navMenu button {
+  display: flex;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  align-items: center;
+  line-height: 0;
+}
+
+.navMenu img {
+  height: 25px;
+  width: 25px;
+  padding: 0;
+  transition: transform 0.3s ease;
+  vertical-align: middle;
+}
+
+.navMenu a:hover img {
+  transform: scale(1.2);
+}
+
+.loginButton {
+  padding: 10px 20px;
+  border: 2px solid #000;
+  border-radius: 30px;
+  color: #333;
+  background-color: transparent;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* 반응형 네비게이션 - 모바일용 */
+.navToggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.navToggle div {
+  width: 25px;
+  height: 3px;
+  background-color: black;
+  margin: 5px 0;
+}
+
+@media (max-width: 768px) {
+  .navMenu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .navMenu.active {
+    display: flex;
+  }
+
+  .navContainer ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navToggle {
+    display: flex;
+  }
+}
+
+/* 페이지의 content 부분 */
+.content {
+  min-height: 100%;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  padding-left: 100px;
+  padding-right: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recentArticles, .bestSelect {
+  flex: 1;
+}
+
+.recentArticles {
+  background-color: #c0c0c0;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+  padding-left: 35px;
+}
+
+.indexCarousel {
+  height: 300px;
+}
+
+.bestSelect {
+  background-color: #c0c0c0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 35px;
+}
+
+.bestCards {
+  height: 300px;
+}
+
+/* footer 스타일 */
+.footer {
+  background-color: #c0c0c0;
+  color: #333333;
+  text-align: center;
+  padding: 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
