@@ -1,9 +1,6 @@
-INDEX VERSION 1.4+C:\GlobalIT_Mini02\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-202662028.index
+INDEX VERSION 1.4+C:\test\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+97951570.index
 1877820449.index
-1089662012.index
-1089662012.index
-2188332389.index
-120878161.index
-3410792107.index
-794661854.index
+3309535516.index
+4158719739.index
+2835005645.index
