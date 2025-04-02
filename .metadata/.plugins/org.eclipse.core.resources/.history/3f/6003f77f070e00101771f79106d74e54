@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+<style>
+	body{margin:0; padding:0; text-align:center;}
+    .bordertest{
+        border: 1px solid darkblue;
+        clear: both;
+        margin-left: 20vh;
+        margin-right: 20vh;
+        
+    }
+    img{
+    	float: left;
+    	width: 150px;
+        height: 150px;
+        line-height: 150px;
+        border: 1px solid black;
+    }
+    /* 스마트폰 모드 (최대 너비 576px) */
+    @media (max-width: 576px) {
+    /* 스마트폰 모드에 적용할 CSS 스타일 */
+        .bordertest{margin: 0;}
+        img{border-color: yellow;}
+    }
+
+    /* 태블릿 및 스마트폰 모드 (최대 너비 768px) */
+    @media (max-width: 768px) {
+    /* 태블릿 및 스마트폰 모드에 적용할 CSS 스타일 */
+        .bordertest{margin: 0;}
+        img{border-color: red;}
+    }
+    
+</style>
+</head>
+<body>
+ <h1>기사 목록 띄우기</h1>
+ <c:forEach items="${boardLists }" var="post">
+    <div class="bordertest">
+        <img src="" alt="썸네일">
+        <div>
+            <h2>${post.title}</h2>
+            <p>${post.country}</p>
+            <p>${post.tag}</p>
+            <p>${post.content}</p>
+        </div>
+    </div>  
+ </c:forEach>
+	<div>
+		<%-- ${ map.pagingImg } --%>
+		페이징 처리
+	</div>
+
+
+</body>
+</html>

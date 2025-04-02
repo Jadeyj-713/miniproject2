@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+    const viewLink = document.getElementById('viewLink');
+    const viewForm = document.getElementById('viewForm');
+
+    viewLink.addEventListener('click', function(event) {
+        viewForm.submit();
+    });
+});

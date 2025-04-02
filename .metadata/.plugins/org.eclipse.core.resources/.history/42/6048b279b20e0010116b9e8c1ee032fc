@@ -1,0 +1,8 @@
+package com.yeogi.dao;
+
+public class MemberDAO {
+	public MemberDAO() {
+		super();
+	}
+	
+}
