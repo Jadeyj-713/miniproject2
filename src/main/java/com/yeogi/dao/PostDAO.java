@@ -49,7 +49,7 @@ public class PostDAO extends DBConnPool{
                + " ) "
                + " WHERE rNum BETWEEN ? AND ?";
         
-        System.out.println(query.replaceFirst("\\?", map.get("start").toString())+map.get("end").toString());
+        //System.out.println(query.replaceFirst("\\?", map.get("start").toString())+map.get("end").toString());
         
         try {
             psmt = con.prepareStatement(query);
@@ -113,7 +113,7 @@ public class PostDAO extends DBConnPool{
         } 
         return generatedPostID;
     }
- // 주어진 일련번호에 해당하는 게시물을 DTO에 담아 반환합니다.
+    // 주어진 일련번호에 해당하는 게시물을 DTO에 담아 반환합니다.
     public PostDTO selectView(int postID) {
         PostDTO pdto = new PostDTO(); // DTO 객체 생성
         String query = "SELECT p.*, m.name FROM post p JOIN member m ON p.id = m.id WHERE p.postID=?";
@@ -127,10 +127,12 @@ public class PostDAO extends DBConnPool{
                 pdto.setTitle(rs.getString("title"));
                 pdto.setCountry(rs.getString("country"));
                 pdto.setContent(rs.getString("content"));
+                pdto.setTag(rs.getString("tag"));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 pdto.setPostDate(sdf.format(rs.getDate("postDate")));
                 pdto.setName(rs.getString("name"));  // ← 회원 테이블에서 가져온 이름
                 pdto.setVcount(rs.getInt("vcount"));
+                pdto.setId(rs.getString("id"));
             }
         } catch (Exception e) {
             System.out.println("게시물 상세보기 중 예외 발생");
@@ -178,7 +180,6 @@ public class PostDAO extends DBConnPool{
             psmt.setInt(parameterIndex++, (Integer) map.get("start"));
             psmt.setInt(parameterIndex, (Integer) map.get("end"));
             
-            System.out.println(query);
             
             rs = psmt.executeQuery();
             board = new ArrayList<>();
@@ -186,11 +187,16 @@ public class PostDAO extends DBConnPool{
                 // Model 객체에 게시글 데이터 저장
             	PostDTO dto = new PostDTO();
 
+            	PreparedStatement subPsmt=con.prepareStatement(" select imgid from img where postid = ? and img_index=1 ");
+            	subPsmt.setInt(1, rs.getInt("postid"));
+            	ResultSet subrs = subPsmt.executeQuery();
+            	while (subrs.next())
+            		dto.setContent(subrs.getString("imgid"));
+            	
                 dto.setPostID(rs.getInt(1));
                 dto.setTitle(rs.getString(2));
                 dto.setTag(rs.getString(3));
                 dto.setCountry(rs.getString(4));
-                dto.setContent(rs.getString(5));
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 dto.setPostDate(sdf.format(rs.getDate("postDate")));
                 dto.setId(rs.getString("id"));
@@ -204,7 +210,28 @@ public class PostDAO extends DBConnPool{
         }
         return board;
     }
+ 	// 태그 검색 후 게시물 개수 반환
+    public int selectTagCount(Map<String, Object> map) {
+        int totalCount = 0;
+        String query = " SELECT COUNT(*) FROM post ";
+        if (map.containsKey("tag")) {
+            query += " WHERE tag LIKE ? ";
+        }
 
+        try {
+            psmt = con.prepareStatement(query);
+            if (map.containsKey("tag")) {
+                psmt.setString(1, "%" + map.get("tag") + "%");
+            }
+            rs = psmt.executeQuery();
+            rs.next();
+            totalCount = rs.getInt(1);
+        } catch (Exception e) {
+            System.out.println("태그 검색 게시물 카운트 중 예외 발생");
+            e.printStackTrace();
+        }
+        return totalCount;
+    }
     
     
 }
